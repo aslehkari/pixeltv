@@ -1,0 +1,6 @@
+{
+  "name": "Anniversary Post Generator - Telegram Music Showcase",
+  "description": "Create luxury glass showcase anniversary posts for Telegram music channels with 3D gold typography, glass reflections, and customizable marble pedestal branding.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

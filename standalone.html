@@ -1,0 +1,1664 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PIXEL TV - سالگرد موزیک</title>
+  
+  <!-- Font Definitions: YekanBakh first, with Vazirmatn fallback -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800;900&family=Cinzel+Decorative:wght@700;900&family=Cormorant+Garamond:wght@600;700&family=Montserrat:wght@500;600;700;800;900&family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Vazirmatn:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  
+  <style>
+    /* Local YekanBakh font definition (supports public/fonts/YekanBakh.woff) */
+    @font-face {
+      font-family: 'YekanBakh';
+      src: url('public/fonts/YekanBakh.woff') format('woff'),
+           url('./public/fonts/YekanBakh.woff') format('woff'),
+           url('/fonts/YekanBakh.woff') format('woff'),
+           url('./fonts/YekanBakh.woff') format('woff'),
+           url('fonts/YekanBakh.woff') format('woff');
+      font-weight: 100 900;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      background: #09090b;
+      color: #f4f4f5;
+      font-family: 'YekanBakh', 'Vazirmatn', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      overflow-x: hidden;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    button, input, select, textarea {
+      font-family: inherit;
+    }
+
+    /* Header */
+    header {
+      background: rgba(13, 13, 15, 0.95);
+      border-bottom: 1px solid #27272a;
+      padding: 10px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(12px);
+    }
+
+    .brand {
+      color: #f59e0b;
+      font-weight: 900;
+      font-size: 16px;
+      letter-spacing: 1.5px;
+      font-family: 'Montserrat', sans-serif;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .brand-icon {
+      width: 28px;
+      height: 28px;
+      background: linear-gradient(135deg, #f59e0b, #b45309);
+      border-radius: 7px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #09090b;
+      font-size: 14px;
+      box-shadow: 0 2px 8px rgba(245, 158, 11, 0.3);
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .ratios {
+      display: flex;
+      background: #18181b;
+      border: 1px solid #27272a;
+      border-radius: 8px;
+      padding: 2px;
+    }
+
+    .ratio-btn {
+      background: none;
+      border: none;
+      color: #a1a1aa;
+      padding: 4px 8px;
+      font-size: 11px;
+      cursor: pointer;
+      border-radius: 6px;
+      font-family: monospace;
+      font-weight: bold;
+      transition: 0.15s;
+    }
+
+    .ratio-btn.active {
+      background: #f59e0b;
+      color: #09090b;
+    }
+
+    .btn {
+      padding: 6px 14px;
+      border-radius: 8px;
+      font-size: 12px;
+      font-weight: bold;
+      cursor: pointer;
+      border: none;
+      transition: 0.15s;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .btn svg {
+      width: 14px;
+      height: 14px;
+    }
+
+    .btn-copy {
+      background: #18181b;
+      color: #fbbf24;
+      border: 1px solid rgba(245, 158, 11, 0.3);
+    }
+
+    .btn-download {
+      background: linear-gradient(90deg, #f59e0b, #d97706);
+      color: #09090b;
+      box-shadow: 0 4px 12px rgba(245, 158, 11, 0.25);
+    }
+
+    .btn:active {
+      transform: scale(0.96);
+    }
+
+    /* Layout */
+    main {
+      flex: 1;
+      max-width: 1280px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 16px;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 20px;
+      align-items: start;
+    }
+
+    @media (min-width: 980px) {
+      main {
+        grid-template-columns: 7fr 5fr;
+      }
+    }
+
+    /* Canvas Section */
+    .canvas-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: sticky;
+      top: 64px;
+    }
+
+    .canvas-box {
+      width: 100%;
+      max-width: 520px;
+      background: #121215;
+      border: 1px solid #27272a;
+      border-radius: 18px;
+      padding: 6px;
+      box-shadow: 0 25px 50px -12px rgba(0,0,0,0.85);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .canvas-inner {
+      position: relative;
+      width: 100%;
+      border-radius: 14px;
+      overflow: hidden;
+      background: #000;
+      cursor: grab;
+      transition: transform 0.12s ease-out;
+    }
+
+    .canvas-inner:active {
+      cursor: grabbing;
+    }
+
+    canvas {
+      width: 100%;
+      height: auto;
+      display: block;
+      pointer-events: none;
+    }
+
+    .canvas-drag-hint {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      background: rgba(9, 9, 11, 0.8);
+      border: 1px solid #27272a;
+      border-radius: 6px;
+      padding: 3px 8px;
+      font-size: 10px;
+      color: #a1a1aa;
+      pointer-events: none;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .canvas-toolbar {
+      margin-top: 10px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: #141417;
+      border: 1px solid #27272a;
+      padding: 4px 14px;
+      border-radius: 10px;
+      font-size: 11px;
+      font-family: monospace;
+    }
+
+    .icon-btn {
+      background: none;
+      border: none;
+      color: #a1a1aa;
+      cursor: pointer;
+      font-size: 14px;
+      padding: 2px 4px;
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .icon-btn:hover {
+      color: #fff;
+    }
+
+    .icon-btn svg {
+      width: 14px;
+      height: 14px;
+    }
+
+    /* Controls Panel */
+    .controls {
+      background: #121215;
+      border: 1px solid #27272a;
+      border-radius: 18px;
+      padding: 16px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    }
+
+    /* Tabs */
+    .tabs {
+      display: flex;
+      background: #09090b;
+      border: 1px solid #27272a;
+      border-radius: 12px;
+      padding: 3px;
+      margin-bottom: 16px;
+      gap: 3px;
+    }
+
+    .tab-btn {
+      flex: 1;
+      padding: 7px 2px;
+      background: none;
+      border: none;
+      color: #a1a1aa;
+      font-size: 11px;
+      font-weight: bold;
+      border-radius: 8px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+      transition: 0.15s;
+    }
+
+    .tab-btn svg {
+      width: 14px;
+      height: 14px;
+    }
+
+    .tab-btn.active {
+      background: #f59e0b;
+      color: #09090b;
+    }
+
+    .tab-content {
+      display: none;
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+
+    /* Cards & Inputs */
+    .card-panel {
+      background: #09090b;
+      border: 1px solid #27272a;
+      border-radius: 12px;
+      padding: 12px;
+      margin-bottom: 12px;
+    }
+
+    .form-group {
+      margin-bottom: 12px;
+    }
+
+    label {
+      display: block;
+      font-size: 11px;
+      color: #a1a1aa;
+      margin-bottom: 5px;
+      font-weight: 500;
+    }
+
+    .label-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 4px;
+    }
+
+    .val-badge {
+      font-family: monospace;
+      color: #f59e0b;
+      font-size: 11px;
+      font-weight: bold;
+    }
+
+    input[type="text"], textarea, select {
+      width: 100%;
+      background: #09090b;
+      border: 1px solid #27272a;
+      border-radius: 8px;
+      padding: 8px 10px;
+      color: #fef08a;
+      font-size: 12px;
+      outline: none;
+    }
+
+    input[type="text"]:focus, select:focus, textarea:focus {
+      border-color: #f59e0b;
+    }
+
+    input[type="range"] {
+      width: 100%;
+      accent-color: #f59e0b;
+      cursor: pointer;
+    }
+
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+    .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 6px; }
+    .grid-5 { display: grid; grid-template-columns: repeat(5, 1fr); gap: 4px; }
+
+    .preset-btn {
+      background: #09090b;
+      border: 1px solid #27272a;
+      color: #e4e4e7;
+      padding: 6px 2px;
+      border-radius: 6px;
+      font-size: 11px;
+      cursor: pointer;
+      text-align: center;
+      transition: 0.15s;
+    }
+
+    .preset-btn.active {
+      background: #f59e0b;
+      color: #09090b;
+      font-weight: bold;
+      border-color: #f59e0b;
+    }
+
+    .sample-cover-card {
+      background: #09090b;
+      border: 1px solid #27272a;
+      border-radius: 8px;
+      padding: 6px;
+      text-align: center;
+      cursor: pointer;
+      transition: 0.15s;
+    }
+
+    .sample-cover-card.active {
+      border-color: #f59e0b;
+      background: rgba(245, 158, 11, 0.1);
+    }
+
+    .sample-cover-img {
+      width: 100%;
+      aspect-ratio: 1/1;
+      border-radius: 6px;
+      overflow: hidden;
+      background: #000;
+      margin-bottom: 4px;
+    }
+
+    .sample-cover-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .sample-cover-name {
+      font-size: 10px;
+      color: #a1a1aa;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .shape-btn {
+      padding: 8px;
+      background: #09090b;
+      border: 1px solid #27272a;
+      color: #a1a1aa;
+      border-radius: 8px;
+      font-size: 11px;
+      font-weight: 500;
+      cursor: pointer;
+      text-align: center;
+      transition: 0.15s;
+    }
+
+    .shape-btn.active {
+      border-color: #f59e0b;
+      background: rgba(245, 158, 11, 0.1);
+      color: #fbbf24;
+      font-weight: bold;
+    }
+
+    .toggle-box {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 12px;
+      background: #09090b;
+      border: 1px solid #27272a;
+      border-radius: 10px;
+      margin-bottom: 12px;
+    }
+
+    .switch {
+      position: relative;
+      display: inline-block;
+      width: 40px;
+      height: 22px;
+    }
+
+    .switch input { opacity: 0; width: 0; height: 0; }
+    .slider-toggle {
+      position: absolute;
+      cursor: pointer;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background-color: #27272a;
+      transition: .2s;
+      border-radius: 22px;
+    }
+    .slider-toggle:before {
+      position: absolute;
+      content: "";
+      height: 16px; width: 16px;
+      left: 3px; bottom: 3px;
+      background-color: white;
+      transition: .2s;
+      border-radius: 50%;
+    }
+    input:checked + .slider-toggle {
+      background-color: #f59e0b;
+    }
+    input:checked + .slider-toggle:before {
+      transform: translateX(18px);
+    }
+
+    .upload-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      width: 100%;
+      padding: 10px;
+      background: #09090b;
+      border: 1px dashed #3f3f46;
+      color: #f59e0b;
+      border-radius: 10px;
+      text-align: center;
+      font-size: 12px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.15s;
+    }
+
+    .upload-btn:hover {
+      border-color: #f59e0b;
+      background: rgba(245, 158, 11, 0.05);
+    }
+
+    .toast {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #18181b;
+      border: 1px solid #f59e0b;
+      color: #fef08a;
+      padding: 8px 18px;
+      border-radius: 10px;
+      font-size: 12px;
+      font-weight: bold;
+      display: none;
+      z-index: 200;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.8);
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="brand">
+      <div class="brand-icon">✦</div>
+      <span>PIXEL TV</span>
+    </div>
+    <div class="header-actions">
+      <div class="ratios">
+        <button class="ratio-btn active" onclick="setRatio('1:1')">1:1</button>
+        <button class="ratio-btn" onclick="setRatio('4:5')">4:5</button>
+        <button class="ratio-btn" onclick="setRatio('9:16')">9:16</button>
+      </div>
+      <button class="btn btn-copy" onclick="copyImage()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
+        <span>کپی</span>
+      </button>
+      <button class="btn btn-download" onclick="downloadImage()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>
+        <span>دانلود</span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <div class="canvas-wrap">
+      <div class="canvas-box">
+        <div class="canvas-inner" id="canvasBoxInner">
+          <canvas id="mainCanvas"></canvas>
+          <div class="canvas-drag-hint">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="5 9 2 12 5 15"/><polyline points="9 5 12 2 15 5"/><polyline points="15 19 12 22 9 19"/><polyline points="19 9 22 12 19 15"/><line x1="2" x2="22" y1="12" y2="12"/><line x1="12" x2="12" y1="2" y2="22"/></svg>
+            <span>حرکت با لمس / ماوس</span>
+          </div>
+        </div>
+      </div>
+      <div class="canvas-toolbar">
+        <button class="icon-btn" onclick="zoomCanvas(-0.1)" title="کوچک‌نمایی">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" x2="16.65" y1="21" y2="16.65"/><line x1="8" x2="14" y1="11" y2="11"/></svg>
+        </button>
+        <span id="zoomDisplay" style="min-width:40px;text-align:center;">100%</span>
+        <button class="icon-btn" onclick="zoomCanvas(0.1)" title="بزرگ‌نمایی">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" x2="16.65" y1="21" y2="16.65"/><line x1="11" x2="11" y1="8" y2="14"/><line x1="8" x2="14" y1="11" y2="11"/></svg>
+        </button>
+        <span style="color:#27272a;">|</span>
+        <button class="icon-btn" onclick="resetZoom()" title="ریست زوم">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>
+        </button>
+        <span style="color:#27272a;">|</span>
+        <span id="dimDisplay" style="color:#f59e0b;font-weight:bold;">1080×1080</span>
+      </div>
+    </div>
+
+    <div class="controls">
+      <!-- Tabs with Real SVGs -->
+      <div class="tabs">
+        <button class="tab-btn active" onclick="openTab('years')">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></svg>
+          <span>سالگرد</span>
+        </button>
+        <button class="tab-btn" onclick="openTab('cover')">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/></svg>
+          <span>کاور</span>
+        </button>
+        <button class="tab-btn" onclick="openTab('reflections')">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/></svg>
+          <span>شیشه</span>
+        </button>
+        <button class="tab-btn" onclick="openTab('background')">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+          <span>پس‌زمینه</span>
+        </button>
+        <button class="tab-btn" onclick="openTab('banners')">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m19 21-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16z"/></svg>
+          <span>واترمارک</span>
+        </button>
+      </div>
+
+      <!-- Tab 1: Years & Typography -->
+      <div id="tab-years" class="tab-content active">
+        <div class="form-group">
+          <label>تعداد سال</label>
+          <div class="grid-5" id="yearButtons"></div>
+        </div>
+
+        <div class="card-panel">
+          <div class="form-group">
+            <label>نام کانال</label>
+            <input type="text" id="inpChannel" value="PIXEL TV" oninput="render()">
+          </div>
+          <div class="grid-2">
+            <div class="form-group" style="margin-bottom:0">
+              <label>متن اصلی</label>
+              <input type="text" id="inpYears" value="ONE" oninput="render()">
+            </div>
+            <div class="form-group" style="margin-bottom:0">
+              <label>متن زیرین</label>
+              <input type="text" id="inpSubtitle" value="YEAR AGO" oninput="render()">
+            </div>
+          </div>
+        </div>
+
+        <div class="card-panel">
+          <div class="grid-2" style="margin-bottom:10px">
+            <div class="form-group" style="margin-bottom:0">
+              <label>رنگ طلا</label>
+              <select id="selGold" onchange="render()">
+                <option value="royal">طلای کلاسیک</option>
+                <option value="champagne">شامپاینی لوکس</option>
+                <option value="roseGold">رزگلد</option>
+                <option value="silver">نقره و پلاتین</option>
+                <option value="bronze">برنز</option>
+                <option value="bright">طلای براق</option>
+              </select>
+            </div>
+            <div class="form-group" style="margin-bottom:0">
+              <label>فونت متن</label>
+              <select id="selFont" onchange="render()">
+                <option value="Cinzel">Cinzel</option>
+                <option value="Cinzel Decorative">Cinzel Deco</option>
+                <option value="Playfair Display">Playfair</option>
+                <option value="Montserrat">Montserrat</option>
+                <option value="Cormorant Garamond">Cormorant</option>
+              </select>
+            </div>
+          </div>
+          <div>
+            <div class="label-row">
+              <label>عمق ۳بعدی طلا</label>
+              <span class="val-badge" id="valDepth">7</span>
+            </div>
+            <input type="range" id="rngDepth" min="1" max="10" value="7" oninput="document.getElementById('valDepth').innerText=this.value; render()">
+          </div>
+        </div>
+
+        <div class="card-panel">
+          <label style="margin-bottom:8px">تنظیم موقعیت عمودی متن‌ها</label>
+          <div class="grid-3">
+            <div>
+              <span style="font-size:10px;color:#a1a1aa;display:block;margin-bottom:2px">کانال</span>
+              <input type="range" id="rngChanY" min="-50" max="50" value="0" oninput="render()">
+            </div>
+            <div>
+              <span style="font-size:10px;color:#a1a1aa;display:block;margin-bottom:2px">عدد</span>
+              <input type="range" id="rngYearsY" min="-50" max="50" value="0" oninput="render()">
+            </div>
+            <div>
+              <span style="font-size:10px;color:#a1a1aa;display:block;margin-bottom:2px">زیرین</span>
+              <input type="range" id="rngSubY" min="-50" max="50" value="0" oninput="render()">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tab 2: Cover & Cushion -->
+      <div id="tab-cover" class="tab-content">
+        <div class="form-group">
+          <label>آپلود کاور موزیک</label>
+          <input type="file" id="fileCover" accept="image/*" style="display:none" onchange="handleCoverUpload(this)">
+          <div class="upload-btn" onclick="document.getElementById('fileCover').click()">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" x2="12" y1="3" y2="15"/></svg>
+            <span>انتخاب عکس از حافظه</span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>کاورهای آماده</label>
+          <div class="grid-3" id="sampleCoversList"></div>
+        </div>
+
+        <div class="form-group">
+          <label>فرم کاور داخل شیشه</label>
+          <div class="grid-3">
+            <button class="shape-btn active" id="shapeSquare" onclick="setShape('square')">مربعی</button>
+            <button class="shape-btn" id="shapeBook" onclick="setShape('book')">کتاب عتیقه</button>
+            <button class="shape-btn" id="shapeVinyl" onclick="setShape('vinyl')">صفحه ونیل</button>
+          </div>
+        </div>
+
+        <div class="toggle-box">
+          <span style="font-size:12px;font-weight:600">بالشتک مخمل لوکس</span>
+          <label class="switch">
+            <input type="checkbox" id="chkCushion" checked onchange="render()">
+            <span class="slider-toggle"></span>
+          </label>
+        </div>
+
+        <div class="card-panel">
+          <div class="form-group">
+            <div class="label-row">
+              <label>اندازه کاور</label>
+              <span class="val-badge" id="valScale">100%</span>
+            </div>
+            <input type="range" id="rngScale" min="0.6" max="1.4" step="0.02" value="1.0" oninput="document.getElementById('valScale').innerText=Math.round(this.value*100)+'%'; render()">
+          </div>
+
+          <div class="grid-2">
+            <div class="form-group" style="margin-bottom:0">
+              <div class="label-row">
+                <label>چرخش</label>
+                <span class="val-badge" id="valRot">0°</span>
+              </div>
+              <input type="range" id="rngCoverRot" min="-15" max="15" value="0" oninput="document.getElementById('valRot').innerText=this.value+'°'; render()">
+            </div>
+            <div class="form-group" style="margin-bottom:0">
+              <div class="label-row">
+                <label>موقعیت عمودی</label>
+                <span class="val-badge" id="valCoverY">-10px</span>
+              </div>
+              <input type="range" id="rngCoverY" min="-100" max="100" value="-10" oninput="document.getElementById('valCoverY').innerText=this.value+'px'; render()">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tab 3: Glass & Reflections -->
+      <div id="tab-reflections" class="tab-content">
+        <div class="toggle-box">
+          <span style="font-size:12px;font-weight:600">رفلکشن‌های شیشه</span>
+          <label class="switch">
+            <input type="checkbox" id="chkReflections" checked onchange="render()">
+            <span class="slider-toggle"></span>
+          </label>
+        </div>
+
+        <div class="card-panel">
+          <div class="form-group">
+            <div class="label-row">
+              <label>رفلکشن دیواره چپ</label>
+              <span class="val-badge" id="valRefL">75%</span>
+            </div>
+            <input type="range" id="rngRefLeft" min="0" max="1" step="0.05" value="0.75" oninput="document.getElementById('valRefL').innerText=Math.round(this.value*100)+'%'; render()">
+          </div>
+
+          <div class="form-group">
+            <div class="label-row">
+              <label>رفلکشن دیواره راست</label>
+              <span class="val-badge" id="valRefR">75%</span>
+            </div>
+            <input type="range" id="rngRefRight" min="0" max="1" step="0.05" value="0.75" oninput="document.getElementById('valRefR').innerText=Math.round(this.value*100)+'%'; render()">
+          </div>
+
+          <div class="form-group" style="margin-bottom:0">
+            <div class="label-row">
+              <label>رفلکشن کف مرمر</label>
+              <span class="val-badge" id="valRefF">60%</span>
+            </div>
+            <input type="range" id="rngRefFloor" min="0" max="1" step="0.05" value="0.6" oninput="document.getElementById('valRefF').innerText=Math.round(this.value*100)+'%'; render()">
+          </div>
+        </div>
+
+        <div class="card-panel">
+          <div class="form-group">
+            <div class="label-row">
+              <label>نور سقف (اسپات‌لایت)</label>
+              <span class="val-badge" id="valSpot">80%</span>
+            </div>
+            <input type="range" id="rngSpotlight" min="0" max="1" step="0.05" value="0.8" oninput="document.getElementById('valSpot').innerText=Math.round(this.value*100)+'%'; render()">
+          </div>
+
+          <div class="form-group" style="margin-bottom:0">
+            <div class="label-row">
+              <label>درخشش لبه‌های شیشه</label>
+              <span class="val-badge" id="valGlare">70%</span>
+            </div>
+            <input type="range" id="rngGlare" min="0" max="1" step="0.05" value="0.7" oninput="document.getElementById('valGlare').innerText=Math.round(this.value*100)+'%'; render()">
+          </div>
+        </div>
+      </div>
+
+      <!-- Tab 4: Background -->
+      <div id="tab-background" class="tab-content">
+        <div class="form-group">
+          <label>آپلود پس‌زمینه اختصاصی</label>
+          <input type="file" id="fileBg" accept="image/*" style="display:none" onchange="handleBgUpload(this)">
+          <div class="upload-btn" onclick="document.getElementById('fileBg').click()">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" x2="12" y1="3" y2="15"/></svg>
+            <span>انتخاب عکس پس‌زمینه جدید</span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>انتخاب پس‌زمینه</label>
+          <div class="grid-2">
+            <div class="card-panel" style="margin:0;cursor:pointer;padding:8px;display:flex;align-items:center;gap:8px" onclick="useDefaultBg()">
+              <div style="width:36px;height:36px;background:#18181b;border-radius:6px;overflow:hidden;border:1px solid #27272a;">
+                <img id="thumbDefault" src="public/backgrounds/default.png" style="width:100%;height:100%;object-fit:cover" onerror="handleThumbFallback(this)">
+              </div>
+              <span style="font-size:12px;font-weight:bold;color:#f59e0b">پیش‌فرض (default.png)</span>
+            </div>
+          </div>
+        </div>
+
+        <div id="savedBgSection" style="margin-top:10px">
+          <label id="savedBgLabel" style="display:none">پس‌زمینه‌های ذخیره شده</label>
+          <div class="grid-2" id="savedBgList"></div>
+        </div>
+      </div>
+
+      <!-- Tab 5: Watermark -->
+      <div id="tab-banners" class="tab-content">
+        <div class="toggle-box">
+          <span style="font-size:12px;font-weight:600">واترمارک ستون‌های کناری</span>
+          <label class="switch">
+            <input type="checkbox" id="chkBanners" checked onchange="render()">
+            <span class="slider-toggle"></span>
+          </label>
+        </div>
+
+        <div class="grid-2">
+          <div class="card-panel" style="margin:0">
+            <label>ستون چپ</label>
+            <textarea id="txtBannerLeft" rows="2" oninput="render()">PIXEL&#10;TV</textarea>
+          </div>
+          <div class="card-panel" style="margin:0">
+            <label>ستون راست</label>
+            <textarea id="txtBannerRight" rows="2" oninput="render()">PIXEL&#10;TV</textarea>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <div class="toast" id="toast"></div>
+
+  <script>
+    // State
+    const WORDS = { 1: 'ONE', 2: 'TWO', 3: 'THREE', 4: 'FOUR', 5: 'FIVE', 6: 'SIX', 7: 'SEVEN', 8: 'EIGHT', 9: 'NINE', 10: 'TEN' };
+    let currentRatio = '1:1';
+    let currentShape = 'square'; // Default is now Square as requested!
+    let currentZoom = 1;
+
+    // Self-contained high-res SVG sample covers (Guaranteed 100% offline & local load!)
+    const SAMPLES = [
+      {
+        id: 'square-gold',
+        title: 'آلبوم طلایی',
+        shape: 'square',
+        url: 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="500" height="500" viewBox="0 0 500 500"><defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0%23" stop-color="%2318181f"/><stop offset="100%23" stop-color="%2309090c"/></linearGradient><linearGradient id="gold" x1="0" y1="0" x2="1" y2="1"><stop offset="0%23" stop-color="%23fff5cc"/><stop offset="50%23" stop-color="%23d4af37"/><stop offset="100%23" stop-color="%238a6a1e"/></linearGradient></defs><rect width="500" height="500" fill="url(%23bg)"/><rect x="25" y="25" width="450" height="450" fill="none" stroke="url(%23gold)" stroke-width="3" rx="8"/><circle cx="250" cy="230" r="130" fill="none" stroke="%2327272a" stroke-width="12"/><circle cx="250" cy="230" r="100" fill="none" stroke="url(%23gold)" stroke-width="4"/><polygon points="250,165 295,245 205,245" fill="none" stroke="url(%23gold)" stroke-width="3"/><text x="250" y="240" font-family="serif" font-weight="900" font-size="28" fill="%23ffffff" text-anchor="middle" letter-spacing="4">PIXEL TV</text><text x="250" y="415" font-family="sans-serif" font-weight="700" font-size="20" fill="url(%23gold)" text-anchor="middle" letter-spacing="8">ANNIVERSARY EDITION</text></svg>'
+      },
+      {
+        id: 'book',
+        title: 'کتابچه عتیقه',
+        shape: 'book',
+        url: 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="500" height="500" viewBox="0 0 500 500"><defs><linearGradient id="bookbg" x1="0" y1="0" x2="1" y2="0"><stop offset="0%23" stop-color="%23261c14"/><stop offset="50%23" stop-color="%23382b1f"/><stop offset="100%23" stop-color="%23261c14"/></linearGradient></defs><rect width="500" height="500" fill="url(%23bookbg)"/><rect x="30" y="30" width="440" height="440" fill="%23dfcaa9" rx="6"/><line x1="250" y1="30" x2="250" y2="470" stroke="%237b6041" stroke-width="6"/><circle cx="150" cy="220" r="60" fill="none" stroke="%238a6a48" stroke-width="3"/><circle cx="350" cy="220" r="60" fill="none" stroke="%238a6a48" stroke-width="3"/><text x="250" y="420" font-family="serif" font-size="22" font-weight="bold" fill="%235c452e" text-anchor="middle" letter-spacing="3">PIXEL ARCHIVE</text></svg>'
+      },
+      {
+        id: 'vinyl',
+        title: 'صفحه ونیل',
+        shape: 'vinyl',
+        url: 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="500" height="500" viewBox="0 0 500 500"><rect width="500" height="500" fill="%230b0b0e"/><circle cx="250" cy="250" r="180" fill="%2318181b" stroke="%23d4af37" stroke-width="4"/><circle cx="250" cy="250" r="90" fill="%23d4af37"/><circle cx="250" cy="250" r="22" fill="%230b0b0e"/><text x="250" y="110" font-family="serif" font-weight="bold" font-size="32" fill="%23d4af37" text-anchor="middle" letter-spacing="10">PIXEL TV</text></svg>'
+      }
+    ];
+
+    // Background Image Candidate Paths Loader (robust against local file:// and web server)
+    const BG_CANDIDATES = [
+      'public/backgrounds/default.png',
+      './public/backgrounds/default.png',
+      'backgrounds/default.png',
+      './backgrounds/default.png',
+      '/backgrounds/default.png'
+    ];
+
+    let bgImg = new Image();
+    bgImg.crossOrigin = 'anonymous';
+    let bgCandidateIndex = 0;
+
+    function tryLoadNextBg() {
+      if (bgCandidateIndex < BG_CANDIDATES.length) {
+        const src = BG_CANDIDATES[bgCandidateIndex++];
+        bgImg.src = src;
+      } else {
+        // All paths failed, render procedural background
+        render();
+      }
+    }
+
+    bgImg.onload = () => { render(); };
+    bgImg.onerror = () => { tryLoadNextBg(); };
+    tryLoadNextBg();
+
+    function handleThumbFallback(thumb) {
+      if (bgCandidateIndex < BG_CANDIDATES.length) {
+        thumb.src = BG_CANDIDATES[bgCandidateIndex];
+      }
+    }
+
+    // Cover Image
+    let coverImg = new Image();
+    coverImg.crossOrigin = 'anonymous';
+    coverImg.src = SAMPLES[0].url;
+    coverImg.onload = () => { render(); };
+
+    const canvas = document.getElementById('mainCanvas');
+    const ctx = canvas.getContext('2d');
+
+    // Init Sample Covers Cards
+    const sampleList = document.getElementById('sampleCoversList');
+    SAMPLES.forEach((s, idx) => {
+      const card = document.createElement('div');
+      card.className = 'sample-cover-card' + (idx === 0 ? ' active' : '');
+      card.innerHTML = `<div class="sample-cover-img"><img src="${s.url}" alt="${s.title}"></div><div class="sample-cover-name">${s.title}</div>`;
+      card.onclick = () => {
+        document.querySelectorAll('.sample-cover-card').forEach(c => c.classList.remove('active'));
+        card.classList.add('active');
+        setShape(s.shape);
+        coverImg.src = s.url;
+      };
+      sampleList.appendChild(card);
+    });
+
+    // Init Year Buttons (1 to 10)
+    const yrContainer = document.getElementById('yearButtons');
+    for (let i = 1; i <= 10; i++) {
+      const btn = document.createElement('button');
+      btn.className = 'preset-btn' + (i === 1 ? ' active' : '');
+      btn.innerHTML = `<div>${i}</div><div style="font-size:9px;opacity:0.75">${WORDS[i]}</div>`;
+      btn.onclick = () => {
+        document.querySelectorAll('.preset-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        document.getElementById('inpYears').value = WORDS[i];
+        document.getElementById('inpSubtitle').value = i === 1 ? 'YEAR AGO' : 'YEARS AGO';
+        render();
+      };
+      yrContainer.appendChild(btn);
+    }
+
+    function openTab(name) {
+      document.querySelectorAll('.tab-btn').forEach(b => {
+        b.classList.toggle('active', b.getAttribute('onclick').includes(name));
+      });
+      document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+      document.getElementById('tab-' + name).classList.add('active');
+    }
+
+    function setRatio(r) {
+      currentRatio = r;
+      document.querySelectorAll('.ratio-btn').forEach(b => {
+        b.classList.toggle('active', b.innerText === r);
+      });
+      document.getElementById('dimDisplay').innerText = r === '1:1' ? '1080×1080' : r === '4:5' ? '1080×1350' : '1080×1920';
+      render();
+    }
+
+    function setShape(sh) {
+      currentShape = sh;
+      document.querySelectorAll('.shape-btn').forEach(b => b.classList.remove('active'));
+      const activeBtn = document.getElementById('shape' + sh.charAt(0).toUpperCase() + sh.slice(1));
+      if (activeBtn) activeBtn.classList.add('active');
+      render();
+    }
+
+    function zoomCanvas(delta) {
+      currentZoom = Math.min(1.4, Math.max(0.7, currentZoom + delta));
+      document.getElementById('zoomDisplay').innerText = Math.round(currentZoom * 100) + '%';
+      document.getElementById('canvasBoxInner').style.transform = `scale(${currentZoom})`;
+    }
+
+    function resetZoom() {
+      currentZoom = 1;
+      document.getElementById('zoomDisplay').innerText = '100%';
+      document.getElementById('canvasBoxInner').style.transform = 'scale(1)';
+    }
+
+    // Touch & Mouse Drag to Move Cover
+    let isDragging = false;
+    let dragStart = { x: 0, y: 0, initY: 0 };
+    const innerBox = document.getElementById('canvasBoxInner');
+
+    innerBox.addEventListener('mousedown', e => {
+      isDragging = true;
+      dragStart = { x: e.clientX, y: e.clientY, initY: parseInt(document.getElementById('rngCoverY').value) };
+    });
+    window.addEventListener('mousemove', e => {
+      if (!isDragging) return;
+      const dy = (e.clientY - dragStart.y) / currentZoom;
+      const newY = Math.round(dragStart.initY + dy);
+      document.getElementById('rngCoverY').value = Math.max(-100, Math.min(100, newY));
+      document.getElementById('valCoverY').innerText = document.getElementById('rngCoverY').value + 'px';
+      render();
+    });
+    window.addEventListener('mouseup', () => { isDragging = false; });
+
+    innerBox.addEventListener('touchstart', e => {
+      if (e.touches.length === 1) {
+        isDragging = true;
+        dragStart = { x: e.touches[0].clientX, y: e.touches[0].clientY, initY: parseInt(document.getElementById('rngCoverY').value) };
+      }
+    });
+    window.addEventListener('touchmove', e => {
+      if (!isDragging || e.touches.length !== 1) return;
+      const dy = (e.touches[0].clientY - dragStart.y) / currentZoom;
+      const newY = Math.round(dragStart.initY + dy);
+      document.getElementById('rngCoverY').value = Math.max(-100, Math.min(100, newY));
+      document.getElementById('valCoverY').innerText = document.getElementById('rngCoverY').value + 'px';
+      render();
+    });
+    window.addEventListener('touchend', () => { isDragging = false; });
+
+    // Gold Gradients
+    function getGoldGrad(y1, y2, style) {
+      const g = ctx.createLinearGradient(0, y1, 0, y2);
+      if (style === 'champagne') {
+        g.addColorStop(0, '#FFFFFF'); g.addColorStop(0.2, '#F6ECD5'); g.addColorStop(0.5, '#D5B77B'); g.addColorStop(0.75, '#ECD7A8'); g.addColorStop(1, '#9C7A3C');
+      } else if (style === 'roseGold') {
+        g.addColorStop(0, '#FFF0EC'); g.addColorStop(0.25, '#E8A598'); g.addColorStop(0.5, '#BA695D'); g.addColorStop(0.8, '#F0B8AE'); g.addColorStop(1, '#7C362B');
+      } else if (style === 'silver') {
+        g.addColorStop(0, '#FFFFFF'); g.addColorStop(0.2, '#E0E5EC'); g.addColorStop(0.5, '#9AA0A6'); g.addColorStop(0.7, '#DCE1E7'); g.addColorStop(1, '#5F6368');
+      } else if (style === 'bronze') {
+        g.addColorStop(0, '#FFE8D6'); g.addColorStop(0.25, '#CD7F32'); g.addColorStop(0.5, '#8C4D14'); g.addColorStop(0.75, '#DE9B52'); g.addColorStop(1, '#532906');
+      } else if (style === 'bright') {
+        g.addColorStop(0, '#FFFFFF'); g.addColorStop(0.2, '#FFE875'); g.addColorStop(0.5, '#E5A912'); g.addColorStop(0.8, '#FFDF6D'); g.addColorStop(1, '#A06B00');
+      } else {
+        // Royal Gold
+        g.addColorStop(0, '#FFF5CC'); g.addColorStop(0.18, '#FFDE7A'); g.addColorStop(0.42, '#C9932E'); g.addColorStop(0.68, '#F0C865'); g.addColorStop(0.88, '#9E6814'); g.addColorStop(1, '#6E4506');
+      }
+      return g;
+    }
+
+    // Cover Fit (Aspect-Ratio Preserving Center Crop, NO STRETCHING!)
+    function drawCoverFit(context, img, targetW, targetH) {
+      const imgW = img.naturalWidth || img.width;
+      const imgH = img.naturalHeight || img.height;
+      if (!imgW || !imgH) return;
+      const scale = Math.max(targetW / imgW, targetH / imgH);
+      const sW = targetW / scale;
+      const sH = targetH / scale;
+      const sX = (imgW - sW) / 2;
+      const sY = (imgH - sH) / 2;
+      context.drawImage(img, sX, sY, sW, sH, 0, 0, targetW, targetH);
+    }
+
+    // Procedural Fallback Background
+    function drawProceduralBg(W, H) {
+      const bgGrad = ctx.createRadialGradient(W * 0.5, H * 0.35, 100, W * 0.5, H * 0.5, W * 0.8);
+      bgGrad.addColorStop(0, '#1c1a17'); bgGrad.addColorStop(0.4, '#0f0d0c'); bgGrad.addColorStop(1, '#050505');
+      ctx.fillStyle = bgGrad; ctx.fillRect(0, 0, W, H);
+
+      // Floor
+      const floorGrad = ctx.createLinearGradient(0, H * 0.65, 0, H);
+      floorGrad.addColorStop(0, '#0d0c0b'); floorGrad.addColorStop(1, '#020202');
+      ctx.fillStyle = floorGrad; ctx.fillRect(0, H * 0.65, W, H * 0.35);
+
+      // Ring
+      ctx.save();
+      ctx.beginPath();
+      ctx.ellipse(W * 0.5, H * 0.85 + 15, W * 0.44 + 15, H * 0.085 + 8, 0, 0, Math.PI * 2);
+      ctx.strokeStyle = 'rgba(240, 185, 60, 0.85)';
+      ctx.lineWidth = 14; ctx.shadowColor = '#e6a117'; ctx.shadowBlur = 35; ctx.stroke();
+      ctx.restore();
+
+      // Pedestal
+      const pedW = W * 0.44, pedH = H * 0.22, pedX = W * 0.5 - pedW * 0.5, pedY = H * 0.57;
+      ctx.fillStyle = '#151413'; ctx.fillRect(pedX, pedY, pedW, pedH);
+      ctx.strokeStyle = '#caa54e'; ctx.lineWidth = 3; ctx.strokeRect(pedX, pedY, pedW, pedH);
+
+      // Glass box
+      const glassW = W * 0.50, glassH = H * 0.44, glassX = W * 0.5 - glassW * 0.5, glassY = pedY - glassH + 10;
+      ctx.strokeStyle = 'rgba(240, 215, 140, 0.6)'; ctx.lineWidth = 4; ctx.strokeRect(glassX, glassY, glassW, glassH);
+    }
+
+    // Redesigned Ultra-Luxury Black Velvet Cushion
+    function drawLuxuryCushion(CX, cushionY, cushionW, cushionH, scaleFactor) {
+      ctx.save();
+
+      // 1. Soft Ambient Cast Shadow under cushion on marble
+      ctx.beginPath();
+      ctx.ellipse(CX, cushionY + cushionH + 4 * scaleFactor, cushionW * 0.54, 18 * scaleFactor, 0, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(0, 0, 0, 0.82)';
+      ctx.shadowColor = 'rgba(0,0,0,0.9)';
+      ctx.shadowBlur = 24 * scaleFactor;
+      ctx.fill();
+
+      // 2. Base Cushion Geometry with rounded pillowy curves
+      const cushionX = CX - cushionW * 0.5;
+      const cornerR = 14 * scaleFactor;
+
+      // Deep obsidian velvet plush gradient
+      const velvetGrad = ctx.createLinearGradient(0, cushionY, 0, cushionY + cushionH);
+      velvetGrad.addColorStop(0, '#2e2c2c');
+      velvetGrad.addColorStop(0.2, '#1e1c1c');
+      velvetGrad.addColorStop(0.65, '#0e0d0d');
+      velvetGrad.addColorStop(1, '#050505');
+
+      ctx.beginPath();
+      ctx.roundRect(cushionX, cushionY, cushionW, cushionH, cornerR);
+      ctx.fillStyle = velvetGrad;
+      ctx.shadowColor = 'rgba(0, 0, 0, 0.7)';
+      ctx.shadowBlur = 15 * scaleFactor;
+      ctx.shadowOffsetY = 6 * scaleFactor;
+      ctx.fill();
+
+      // 3. Central plush indent / tufting crease where cover sits
+      ctx.save();
+      ctx.beginPath();
+      ctx.ellipse(CX, cushionY + cushionH * 0.4, cushionW * 0.38, cushionH * 0.28, 0, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(0, 0, 0, 0.55)';
+      ctx.filter = 'blur(4px)';
+      ctx.fill();
+      ctx.restore();
+
+      // 4. Tufting fold lines from center to corners (quilted velvet look)
+      ctx.strokeStyle = 'rgba(255, 255, 255, 0.06)';
+      ctx.lineWidth = 1.5 * scaleFactor;
+      ctx.beginPath();
+      ctx.moveTo(CX, cushionY + cushionH * 0.45);
+      ctx.lineTo(cushionX + cornerR, cushionY + cornerR);
+      ctx.moveTo(CX, cushionY + cushionH * 0.45);
+      ctx.lineTo(cushionX + cushionW - cornerR, cushionY + cornerR);
+      ctx.moveTo(CX, cushionY + cushionH * 0.45);
+      ctx.lineTo(cushionX + cornerR * 0.5, cushionY + cushionH - cornerR * 0.5);
+      ctx.moveTo(CX, cushionY + cushionH * 0.45);
+      ctx.lineTo(cushionX + cushionW - cornerR * 0.5, cushionY + cushionH - cornerR * 0.5);
+      ctx.stroke();
+
+      // 5. Luxury Gold Braided Cord (حاشیه قیطان دوزی طلایی دور بالشتک)
+      const goldRope = ctx.createLinearGradient(cushionX, cushionY, cushionX + cushionW, cushionY + cushionH);
+      goldRope.addColorStop(0, '#fcedb6');
+      goldRope.addColorStop(0.3, '#d4af37');
+      goldRope.addColorStop(0.5, '#fff7d6');
+      goldRope.addColorStop(0.8, '#aa7c11');
+      goldRope.addColorStop(1, '#e5be49');
+
+      ctx.beginPath();
+      ctx.roundRect(cushionX, cushionY, cushionW, cushionH, cornerR);
+      ctx.strokeStyle = goldRope;
+      ctx.lineWidth = 2.2 * scaleFactor;
+      ctx.stroke();
+
+      // Top edge delicate velvet sheen
+      ctx.beginPath();
+      ctx.moveTo(cushionX + cornerR, cushionY + 2 * scaleFactor);
+      ctx.lineTo(cushionX + cushionW - cornerR, cushionY + 2 * scaleFactor);
+      ctx.strokeStyle = 'rgba(255, 255, 255, 0.22)';
+      ctx.lineWidth = 1.5 * scaleFactor;
+      ctx.stroke();
+
+      ctx.restore();
+    }
+
+    // Redesigned Ultra-Realistic Vinyl Disc (صفحه ونیل براق با بازتاب نور دوطرفه و شیارهای صوتی)
+    function drawRealisticVinyl(vCX, vCY, radius, scaleFactor) {
+      ctx.save();
+
+      // 1. Vinyl Ambient Shadow
+      ctx.beginPath();
+      ctx.arc(vCX, vCY, radius, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(0,0,0,0.85)';
+      ctx.shadowColor = 'rgba(0,0,0,0.9)';
+      ctx.shadowBlur = 20 * scaleFactor;
+      ctx.shadowOffsetY = 10 * scaleFactor;
+      ctx.fill();
+
+      // 2. Black Gloss Vinyl Base
+      const vinylBase = ctx.createRadialGradient(vCX, vCY, radius * 0.1, vCX, vCY, radius);
+      vinylBase.addColorStop(0, '#0c0c0e');
+      vinylBase.addColorStop(0.5, '#161619');
+      vinylBase.addColorStop(0.98, '#08080a');
+      vinylBase.addColorStop(1, '#2b2b30');
+      ctx.beginPath();
+      ctx.arc(vCX, vCY, radius, 0, Math.PI * 2);
+      ctx.fillStyle = vinylBase;
+      ctx.fill();
+
+      // 3. Concentric Sound Grooves (شیارهای ظریف صفحه گرامافون)
+      ctx.save();
+      for (let r = radius * 0.38; r < radius * 0.94; r += 3.5 * scaleFactor) {
+        ctx.beginPath();
+        ctx.arc(vCX, vCY, r, 0, Math.PI * 2);
+        ctx.strokeStyle = 'rgba(255, 255, 255, 0.035)';
+        ctx.lineWidth = 0.8 * scaleFactor;
+        ctx.stroke();
+      }
+      ctx.restore();
+
+      // 4. Double Anisotropic Specular Light Sheen (بازتاب پروانه‌ای نور روی صفحه ونیل)
+      ctx.save();
+      ctx.translate(vCX, vCY);
+      for (let angle = 0; angle < Math.PI * 2; angle += Math.PI) {
+        const sheen = ctx.createRadialGradient(0, 0, radius * 0.35, 0, 0, radius);
+        sheen.addColorStop(0, 'rgba(255, 245, 215, 0.18)');
+        sheen.addColorStop(0.5, 'rgba(255, 255, 255, 0.08)');
+        sheen.addColorStop(1, 'rgba(0, 0, 0, 0)');
+        ctx.fillStyle = sheen;
+        ctx.beginPath();
+        ctx.moveTo(0, 0);
+        ctx.arc(0, 0, radius * 0.97, angle - 0.28, angle + 0.28);
+        ctx.closePath();
+        ctx.fill();
+
+        // Opposite perpendicular specular gleam
+        ctx.beginPath();
+        ctx.moveTo(0, 0);
+        ctx.arc(0, 0, radius * 0.97, angle + Math.PI * 0.5 - 0.18, angle + Math.PI * 0.5 + 0.18);
+        ctx.closePath();
+        ctx.fill();
+      }
+      ctx.restore();
+
+      // 5. Outer Rim High-Gloss Ring
+      ctx.beginPath();
+      ctx.arc(vCX, vCY, radius - 1.5 * scaleFactor, 0, Math.PI * 2);
+      ctx.strokeStyle = 'rgba(255, 255, 255, 0.18)';
+      ctx.lineWidth = 1.2 * scaleFactor;
+      ctx.stroke();
+
+      // 6. Central Luxury Metallic Gold Label
+      const labelRadius = radius * 0.35;
+      const goldLabel = ctx.createLinearGradient(vCX - labelRadius, vCY - labelRadius, vCX + labelRadius, vCY + labelRadius);
+      goldLabel.addColorStop(0, '#fff5d0');
+      goldLabel.addColorStop(0.3, '#d4af37');
+      goldLabel.addColorStop(0.7, '#f3d97d');
+      goldLabel.addColorStop(1, '#8f6e16');
+
+      ctx.beginPath();
+      ctx.arc(vCX, vCY, labelRadius, 0, Math.PI * 2);
+      ctx.fillStyle = goldLabel;
+      ctx.shadowColor = 'rgba(0,0,0,0.6)';
+      ctx.shadowBlur = 8 * scaleFactor;
+      ctx.fill();
+
+      // Inner Label Ring
+      ctx.beginPath();
+      ctx.arc(vCX, vCY, labelRadius * 0.85, 0, Math.PI * 2);
+      ctx.strokeStyle = '#5a420b';
+      ctx.lineWidth = 1 * scaleFactor;
+      ctx.stroke();
+
+      // Brand on Center Label
+      ctx.save();
+      ctx.fillStyle = '#2b1c03';
+      ctx.font = `bold ${Math.round(8 * scaleFactor)}px 'Montserrat', sans-serif`;
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.fillText('PIXEL TV', vCX, vCY - labelRadius * 0.4);
+      ctx.fillText('33⅓ RPM', vCX, vCY + labelRadius * 0.4);
+      ctx.restore();
+
+      // 7. Center Spindle Hole (سوراخ مرکزی صفحه گرامافون)
+      ctx.beginPath();
+      ctx.arc(vCX, vCY, radius * 0.055, 0, Math.PI * 2);
+      ctx.fillStyle = '#09090b';
+      ctx.fill();
+      ctx.strokeStyle = 'rgba(255,255,255,0.4)';
+      ctx.lineWidth = 0.8 * scaleFactor;
+      ctx.stroke();
+
+      ctx.restore();
+    }
+
+    // Master Render Engine
+    function render() {
+      let W = 1080, H = 1080;
+      if (currentRatio === '4:5') H = 1350;
+      if (currentRatio === '9:16') H = 1920;
+      canvas.width = W; canvas.height = H;
+      ctx.clearRect(0, 0, W, H);
+
+      const CX = W * 0.5;
+      const scaleFactor = W / 1080;
+      let showY = currentRatio === '1:1' ? 410 * scaleFactor : currentRatio === '4:5' ? 510 * scaleFactor : 750 * scaleFactor;
+      let pedY = currentRatio === '1:1' ? 720 * scaleFactor : currentRatio === '4:5' ? 860 * scaleFactor : 1170 * scaleFactor;
+
+      // 1. Draw Background with PROPER COVER FIT (No stretch on 4:5 or 9:16!)
+      if (bgImg && bgImg.complete && bgImg.naturalWidth > 0) {
+        drawCoverFit(ctx, bgImg, W, H);
+      } else {
+        drawProceduralBg(W, H);
+      }
+
+      // 2. Spotlight Beam
+      const spot = parseFloat(document.getElementById('rngSpotlight').value);
+      if (spot > 0) {
+        ctx.save();
+        const lightTopY = showY - 260 * scaleFactor;
+        const beamGrad = ctx.createRadialGradient(CX, lightTopY, 20 * scaleFactor, CX, showY, 320 * scaleFactor);
+        beamGrad.addColorStop(0, `rgba(255, 240, 190, ${spot * 0.5})`);
+        beamGrad.addColorStop(0.3, `rgba(255, 215, 120, ${spot * 0.3})`);
+        beamGrad.addColorStop(1, 'rgba(0,0,0,0)');
+        ctx.fillStyle = beamGrad;
+        ctx.beginPath();
+        ctx.moveTo(CX - 40 * scaleFactor, lightTopY);
+        ctx.lineTo(CX + 40 * scaleFactor, lightTopY);
+        ctx.lineTo(CX + 260 * scaleFactor, showY + 160 * scaleFactor);
+        ctx.lineTo(CX - 260 * scaleFactor, showY + 160 * scaleFactor);
+        ctx.closePath();
+        ctx.fill();
+        ctx.restore();
+      }
+
+      // 3. Cover & Cushion Parameters
+      const scale = parseFloat(document.getElementById('rngScale').value);
+      const cSize = 280 * scaleFactor * scale;
+      const cY = showY + parseFloat(document.getElementById('rngCoverY').value) * scaleFactor;
+      const rot = parseFloat(document.getElementById('rngCoverRot').value);
+      const showCushion = document.getElementById('chkCushion').checked;
+      const enableReflections = document.getElementById('chkReflections').checked;
+
+      // Draw Velvet Cushion
+      if (showCushion) {
+        const cushionW = cSize * 1.25;
+        const cushionH = 46 * scaleFactor;
+        const cushionY = cY + cSize * 0.5 - 14 * scaleFactor;
+        drawLuxuryCushion(CX, cushionY, cushionW, cushionH, scaleFactor);
+      }
+
+      // Draw Glass Reflections
+      if (enableReflections && coverImg.complete) {
+        const refL = parseFloat(document.getElementById('rngRefLeft').value);
+        if (refL > 0) {
+          ctx.save();
+          ctx.globalAlpha = refL * 0.42;
+          ctx.translate(CX - cSize * 0.78, cY);
+          ctx.transform(0.45, 0.12, 0, 0.95, 0, 0);
+          ctx.scale(-0.85, 1);
+          ctx.drawImage(coverImg, -cSize/2, -cSize/2, cSize, cSize);
+          const gleam = ctx.createLinearGradient(-cSize/2, 0, cSize/2, 0);
+          gleam.addColorStop(0, 'rgba(255, 235, 170, 0.35)');
+          gleam.addColorStop(1, 'rgba(0, 0, 0, 0.6)');
+          ctx.fillStyle = gleam; ctx.fillRect(-cSize/2, -cSize/2, cSize, cSize);
+          ctx.restore();
+        }
+
+        const refR = parseFloat(document.getElementById('rngRefRight').value);
+        if (refR > 0) {
+          ctx.save();
+          ctx.globalAlpha = refR * 0.42;
+          ctx.translate(CX + cSize * 0.78, cY);
+          ctx.transform(0.45, -0.12, 0, 0.95, 0, 0);
+          ctx.scale(0.85, 1);
+          ctx.drawImage(coverImg, -cSize/2, -cSize/2, cSize, cSize);
+          const gleamR = ctx.createLinearGradient(-cSize/2, 0, cSize/2, 0);
+          gleamR.addColorStop(0, 'rgba(0, 0, 0, 0.6)');
+          gleamR.addColorStop(1, 'rgba(255, 235, 170, 0.35)');
+          ctx.fillStyle = gleamR; ctx.fillRect(-cSize/2, -cSize/2, cSize, cSize);
+          ctx.restore();
+        }
+
+        const refF = parseFloat(document.getElementById('rngRefFloor').value);
+        if (refF > 0) {
+          ctx.save();
+          ctx.globalAlpha = refF * 0.28;
+          ctx.translate(CX, cY + cSize * 0.78);
+          ctx.scale(1, -0.45);
+          ctx.drawImage(coverImg, -cSize/2, -cSize/2, cSize, cSize);
+          const fade = ctx.createLinearGradient(0, -cSize/2, 0, cSize/2);
+          fade.addColorStop(0, 'rgba(0,0,0,0.1)'); fade.addColorStop(1, '#000');
+          ctx.fillStyle = fade; ctx.fillRect(-cSize/2, -cSize/2, cSize, cSize);
+          ctx.restore();
+        }
+      }
+
+      // Draw Main Cover & Shapes
+      if (coverImg.complete) {
+        ctx.save();
+        ctx.translate(CX, cY);
+        if (rot !== 0) ctx.rotate((rot * Math.PI) / 180);
+
+        // Vinyl Mode Redesign: Draw Vinyl sticking out of jacket
+        if (currentShape === 'vinyl') {
+          const vOffset = cSize * 0.42;
+          drawRealisticVinyl(vOffset, 0, cSize * 0.48, scaleFactor);
+        }
+
+        ctx.shadowColor = 'rgba(0, 0, 0, 0.85)';
+        ctx.shadowBlur = 30 * scaleFactor;
+        ctx.shadowOffsetY = 15 * scaleFactor;
+
+        // Clip & Draw Cover
+        const cornerRadius = currentShape === 'book' ? 4 * scaleFactor : 8 * scaleFactor;
+        ctx.beginPath();
+        ctx.roundRect(-cSize/2, -cSize/2, cSize, cSize, cornerRadius);
+        ctx.clip();
+        ctx.drawImage(coverImg, -cSize/2, -cSize/2, cSize, cSize);
+
+        // Book Spine highlight
+        if (currentShape === 'book') {
+          const spineGrad = ctx.createLinearGradient(0, 0, 20 * scaleFactor, 0);
+          spineGrad.addColorStop(0, 'rgba(0,0,0,0.6)');
+          spineGrad.addColorStop(0.5, 'rgba(255,255,255,0.2)');
+          spineGrad.addColorStop(1, 'rgba(0,0,0,0.4)');
+          ctx.fillStyle = spineGrad;
+          ctx.fillRect(-10 * scaleFactor, -cSize/2, 20 * scaleFactor, cSize);
+        }
+
+        // Spotlight highlight top
+        const topHighlight = ctx.createLinearGradient(0, -cSize/2, 0, 0);
+        topHighlight.addColorStop(0, 'rgba(255, 245, 210, 0.32)');
+        topHighlight.addColorStop(1, 'rgba(255, 255, 255, 0)');
+        ctx.fillStyle = topHighlight;
+        ctx.fillRect(-cSize/2, -cSize/2, cSize, cSize * 0.4);
+        ctx.restore();
+
+        // Metallic Border
+        ctx.save();
+        ctx.translate(CX, cY);
+        if (rot !== 0) ctx.rotate((rot * Math.PI) / 180);
+        ctx.strokeStyle = 'rgba(240, 210, 130, 0.45)';
+        ctx.lineWidth = 2 * scaleFactor;
+        ctx.beginPath();
+        ctx.roundRect(-cSize/2, -cSize/2, cSize, cSize, cornerRadius);
+        ctx.stroke();
+        ctx.restore();
+      }
+
+      // Glare lines
+      const glare = parseFloat(document.getElementById('rngGlare').value);
+      if (glare > 0) {
+        ctx.save();
+        ctx.strokeStyle = `rgba(255, 248, 220, ${glare * 0.55})`;
+        ctx.lineWidth = 2 * scaleFactor;
+        ctx.beginPath();
+        ctx.moveTo(CX - 240 * scaleFactor, showY - 180 * scaleFactor);
+        ctx.lineTo(CX + 180 * scaleFactor, showY + 180 * scaleFactor);
+        ctx.stroke();
+        ctx.restore();
+      }
+
+      // 4. Pedestal 3D Gold Typography
+      ctx.save();
+      ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+      const style = document.getElementById('selGold').value;
+      const font = document.getElementById('selFont').value;
+
+      // Channel Name
+      const chanText = document.getElementById('inpChannel').value.trim();
+      if (chanText) {
+        const chanY = pedY - 70 * scaleFactor + parseFloat(document.getElementById('rngChanY').value) * scaleFactor;
+        const spacedChan = chanText.toUpperCase().split('').join('   ');
+        ctx.font = `600 ${22 * scaleFactor}px 'Montserrat', sans-serif`;
+        ctx.shadowColor = 'rgba(0,0,0,0.9)'; ctx.shadowBlur = 8 * scaleFactor; ctx.shadowOffsetY = 3 * scaleFactor;
+        ctx.fillStyle = getGoldGrad(chanY - 12 * scaleFactor, chanY + 12 * scaleFactor, style);
+        ctx.fillText(spacedChan, CX, chanY);
+        ctx.strokeStyle = 'rgba(255, 255, 255, 0.35)'; ctx.lineWidth = 0.5 * scaleFactor;
+        ctx.strokeText(spacedChan, CX, chanY);
+      }
+
+      // 3D Years Number
+      const yearsText = document.getElementById('inpYears').value.trim().toUpperCase();
+      if (yearsText) {
+        const yearsY = pedY + 10 * scaleFactor + parseFloat(document.getElementById('rngYearsY').value) * scaleFactor;
+        const depth = parseInt(document.getElementById('rngDepth').value);
+        ctx.font = `900 ${92 * scaleFactor}px '${font}', serif`;
+
+        // Bloom
+        ctx.save();
+        ctx.shadowColor = '#e5a522'; ctx.shadowBlur = 35 * scaleFactor;
+        ctx.fillStyle = 'rgba(220, 160, 40, 0.2)';
+        ctx.fillText(yearsText, CX, yearsY);
+        ctx.restore();
+
+        // 3D Extrusion
+        const depthSteps = Math.max(2, Math.round(depth * 1.6 * scaleFactor));
+        for (let d = depthSteps; d > 0; d--) {
+          ctx.fillStyle = d === depthSteps ? '#1d1204' : d > depthSteps * 0.6 ? '#42280a' : '#70440f';
+          ctx.shadowColor = 'rgba(0,0,0,0.85)'; ctx.shadowBlur = d === depthSteps ? 12 * scaleFactor : 0;
+          ctx.shadowOffsetY = d;
+          ctx.fillText(yearsText, CX, yearsY + d);
+        }
+
+        // Front Face
+        ctx.fillStyle = getGoldGrad(yearsY - 50 * scaleFactor, yearsY + 40 * scaleFactor, style);
+        ctx.fillText(yearsText, CX, yearsY);
+
+        // Razor Sharp Bevel
+        ctx.strokeStyle = 'rgba(255, 255, 255, 0.65)'; ctx.lineWidth = 1.2 * scaleFactor;
+        ctx.strokeText(yearsText, CX, yearsY);
+      }
+
+      // Subtitle
+      const subText = document.getElementById('inpSubtitle').value.trim();
+      if (subText) {
+        const subY = pedY + 75 * scaleFactor + parseFloat(document.getElementById('rngSubY').value) * scaleFactor;
+        const spacedSub = subText.toUpperCase().split('').join('   ');
+        ctx.font = `600 ${19 * scaleFactor}px 'Cinzel', 'Montserrat', sans-serif`;
+        ctx.shadowColor = 'rgba(0,0,0,0.9)'; ctx.shadowBlur = 6 * scaleFactor; ctx.shadowOffsetY = 2 * scaleFactor;
+        ctx.fillStyle = getGoldGrad(subY - 10 * scaleFactor, subY + 10 * scaleFactor, style);
+        ctx.fillText(spacedSub, CX, subY);
+        ctx.strokeStyle = 'rgba(255, 255, 255, 0.25)'; ctx.lineWidth = 0.5 * scaleFactor;
+        ctx.strokeText(spacedSub, CX, subY);
+      }
+
+      // 5. Watermark Banners
+      if (document.getElementById('chkBanners').checked) {
+        ctx.save();
+        ctx.fillStyle = 'rgba(215, 175, 80, 0.4)';
+        ctx.font = `500 ${13 * scaleFactor}px 'Montserrat', sans-serif`;
+
+        // Left
+        ctx.textAlign = 'left';
+        const leftLines = document.getElementById('txtBannerLeft').value.split('\n');
+        let lY = showY - 100 * scaleFactor;
+        for (const line of leftLines) {
+          ctx.fillText(line, 25 * scaleFactor, lY);
+          lY += 18 * scaleFactor;
+        }
+
+        // Right
+        ctx.textAlign = 'right';
+        const rightLines = document.getElementById('txtBannerRight').value.split('\n');
+        let rY = showY;
+        for (const line of rightLines) {
+          ctx.fillText(line, W - 25 * scaleFactor, rY);
+          rY += 16 * scaleFactor;
+        }
+        ctx.restore();
+      }
+
+      ctx.restore();
+    }
+
+    // File Uploads
+    function handleCoverUpload(input) {
+      if (input.files && input.files[0]) {
+        const reader = new FileReader();
+        reader.onload = e => {
+          coverImg.src = e.target.result;
+          document.querySelectorAll('.sample-cover-card').forEach(c => c.classList.remove('active'));
+        };
+        reader.readAsDataURL(input.files[0]);
+      }
+    }
+
+    function handleBgUpload(input) {
+      if (input.files && input.files[0]) {
+        const reader = new FileReader();
+        reader.onload = e => {
+          bgImg.src = e.target.result;
+          saveBgToStorage(input.files[0].name.replace(/\.[^/.]+$/, ''), e.target.result);
+        };
+        reader.readAsDataURL(input.files[0]);
+      }
+    }
+
+    function useDefaultBg() {
+      bgCandidateIndex = 0;
+      tryLoadNextBg();
+      showToast('پس‌زمینه پیش‌فرض انتخاب شد');
+    }
+
+    // Local Storage for Uploaded Backgrounds
+    function saveBgToStorage(name, dataUrl) {
+      try {
+        const id = 'bg_' + Date.now();
+        const saved = JSON.parse(localStorage.getItem('pixel_saved_bgs') || '[]');
+        saved.push({ id, name, dataUrl });
+        localStorage.setItem('pixel_saved_bgs', JSON.stringify(saved));
+        renderSavedBgs();
+        showToast('پس‌زمینه ذخیره شد');
+      } catch (err) {
+        showToast('ذخیره پس‌زمینه انجام شد');
+      }
+    }
+
+    function renderSavedBgs() {
+      try {
+        const saved = JSON.parse(localStorage.getItem('pixel_saved_bgs') || '[]');
+        const list = document.getElementById('savedBgList');
+        const lbl = document.getElementById('savedBgLabel');
+        list.innerHTML = '';
+        if (saved.length > 0) {
+          lbl.style.display = 'block';
+          saved.forEach(bg => {
+            const card = document.createElement('div');
+            card.className = 'card-panel';
+            card.style.cssText = 'margin:0;cursor:pointer;padding:8px;display:flex;align-items:center;justify-content:space-between;gap:6px';
+            card.innerHTML = `
+              <div style="display:flex;align-items:center;gap:6px;min-width:0" onclick="bgImg.src='${bg.dataUrl}'">
+                <img src="${bg.dataUrl}" style="width:30px;height:30px;border-radius:4px;object-fit:cover">
+                <span style="font-size:11px;color:#ddd;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${bg.name}</span>
+              </div>
+              <button onclick="deleteBg('${bg.id}')" style="background:none;border:none;color:#f87171;cursor:pointer;font-size:14px">×</button>
+            `;
+            list.appendChild(card);
+          });
+        } else {
+          lbl.style.display = 'none';
+        }
+      } catch (e) {}
+    }
+
+    function deleteBg(id) {
+      try {
+        let saved = JSON.parse(localStorage.getItem('pixel_saved_bgs') || '[]');
+        saved = saved.filter(b => b.id !== id);
+        localStorage.setItem('pixel_saved_bgs', JSON.stringify(saved));
+        renderSavedBgs();
+      } catch (e) {}
+    }
+
+    // Toast
+    function showToast(msg) {
+      const t = document.getElementById('toast');
+      t.innerText = msg; t.style.display = 'block';
+      setTimeout(() => { t.style.display = 'none'; }, 2200);
+    }
+
+    // Actions
+    function copyImage() {
+      canvas.toBlob(blob => {
+        if (!blob) return;
+        navigator.clipboard.write([new ClipboardItem({ 'image/png': blob })])
+          .then(() => showToast('کپی شد'))
+          .catch(() => downloadImage());
+      });
+    }
+
+    function downloadImage() {
+      const a = document.createElement('a');
+      const chan = document.getElementById('inpChannel').value.replace(/\s+/g, '_') || 'PIXEL_TV';
+      const yrs = document.getElementById('inpYears').value || 'anniversary';
+      a.download = `${chan}_${yrs}.png`;
+      a.href = canvas.toDataURL('image/png');
+      a.click();
+      showToast('دانلود شد');
+    }
+
+    // Initial font load check & render
+    if (document.fonts) {
+      document.fonts.ready.then(() => render());
+    }
+    renderSavedBgs();
+    render();
+  </script>
+</body>
+</html>
